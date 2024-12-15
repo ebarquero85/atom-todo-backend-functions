@@ -1,35 +1,32 @@
 module.exports = {
-  root: true,
-  env: {
-    es6: true,
-    node: true,
+  "root": true,
+  "env": {
+    "es6": true,
+    "node": true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'google',
-    'plugin:@typescript-eslint/recommended',
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "google",
+    "plugin:@typescript-eslint/recommended",
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: ['tsconfig.json', 'tsconfig.dev.json'],
-    sourceType: 'module',
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["tsconfig.json", "tsconfig.dev.json"],
+    "sourceType": "module",
   },
-  ignorePatterns: [
-    '/lib/**/*', // Ignore built files.
-    '/generated/**/*', // Ignore generated files.
+  "ignorePatterns": [
+    "/lib/**/*", // Ignore built files.
+    "/generated/**/*", // Ignore generated files.
   ],
-  plugins: [
-    '@typescript-eslint',
-    'import',
-  ],
-  rules: {
-    'quotes': ['error', 'single'],
-    'import/no-unresolved': 0,
-    'indent': ['error', 2],
-    'object-curly-spacing': 'off',
-    'comma-dangle': 'off'
+  "plugins": ["@typescript-eslint", "import"],
+  "rules": {
+    "import/no-unresolved": 0,
+    "object-curly-spacing": "off",
+    "comma-dangle": "off",
+    "linebreak-style": "off",
+    "quotes": "off", // Con comillas alrededor de todas las claves
   },
 };
