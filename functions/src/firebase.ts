@@ -7,7 +7,7 @@ dotenv.config({ path: "./.env" });
 // console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
 initializeApp({
-  credential: applicationDefault(),
+  credential: applicationDefault(), // GOOGLE_APPLICATION_CREDENTIALS
 });
 
 const db = getFirestore();
