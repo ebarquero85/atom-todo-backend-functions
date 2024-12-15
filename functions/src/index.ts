@@ -1,12 +1,15 @@
-// import {onRequest} from "firebase-functions/v2/https";
-// import * as logger from "firebase-functions/logger";
+import { https } from "firebase-functions";
+import { initializeApp } from "firebase-admin/app";
+import express, { Request, Response } from "express";
 
+// Inicializar Firebase Admin
+initializeApp();
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+// Crear una instancia de Express
+const app = express();
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+app.get("/hello", (req: Request, res: Response) => {
+  res.status(200).send("<h1>Hello World desde Firebase Functions!</h1>");
+});
 
+exports.api = https.onRequest(app);
