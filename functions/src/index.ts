@@ -2,6 +2,7 @@ import { https } from "firebase-functions";
 import express, { Request, Response } from "express";
 
 import usersRoutes from "./routes/usersRoutes";
+import taskRoutes from "./routes/taskRoutes";
 
 const app = express();
 
@@ -12,5 +13,6 @@ app.get("/", async (req: Request, res: Response) => {
 });
 
 app.use("/users", usersRoutes);
+app.use("/tasks", taskRoutes);
 
 exports.api = https.onRequest(app);

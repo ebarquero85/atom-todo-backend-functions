@@ -3,7 +3,7 @@ import { UserInterface } from "../interfaces/usersInterfaces";
 import {
   createUserService,
   getUserByEmailService,
-} from "../services/userServices";
+} from "../services/userService";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -12,7 +12,7 @@ export const createUser = async (req: Request, res: Response) => {
     if (!email) {
       return res
         .status(400)
-        .json({ error: true, message: `Please add a email` });
+        .json({ error: true, message: `Please add a email on json` });
     }
 
     const data = await createUserService(email);
