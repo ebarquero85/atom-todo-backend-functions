@@ -3,6 +3,7 @@ import { TaskInterface } from "../interfaces/tasksInterfaces";
 
 export const createTaskService = async (userId: string, task: string) => {
   const newTaskRef = db.collection("tasks").doc();
+
   const newTask = {
     id: newTaskRef.id,
     userId,
@@ -10,7 +11,9 @@ export const createTaskService = async (userId: string, task: string) => {
     completed: false,
     createdAt: new Date(),
   };
+
   await newTaskRef.set(newTask);
+
   return newTask;
 };
 
@@ -28,8 +31,25 @@ export const getTaskService = async (userId: string) => {
       ...doc.data(),
       createdAt: doc.data().createdAt.toDate(),
     }));
+
     return tasks as TaskInterface[];
   } else {
     return [];
   }
+};
+
+export const deleteTaskService = async (taskId: string) => {
+  const snapshot = await db.collection("tasks").where("id", "==", taskId).get();
+
+  if (snapshot.empty) {
+    return false;
+  }
+
+  const doc = snapshot.docs[0];
+
+  await db.collection("tasks").doc(doc.id).update({
+    deleted: true,
+  });
+
+  return true;
 };
