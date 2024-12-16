@@ -29,6 +29,7 @@ module.exports = {
     "linebreak-style": "off",
     "quotes": "off",
     "indent": "off",
-    "new-cap": "off"
+    "new-cap": "off",
+    "max-len": ["error", { "code": 100 }],
   },
 };

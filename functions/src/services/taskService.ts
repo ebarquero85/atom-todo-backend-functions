@@ -1,12 +1,17 @@
 import { db } from "../firebase";
 import { TaskInterface } from "../interfaces/tasksInterfaces";
 
-export const createTaskService = async (userId: string, task: string) => {
+export const createTaskService = async (
+  userId: string,
+  title: string,
+  task: string
+) => {
   const newTaskRef = db.collection("tasks").doc();
 
   const newTask = {
     id: newTaskRef.id,
     userId,
+    title,
     task,
     completed: false,
     createdAt: new Date(),
@@ -55,6 +60,7 @@ export const deleteTaskService = async (taskId: string) => {
 };
 
 export const updateTaskService = async (
+  title: string,
   taskId: string,
   task: string,
   completed: boolean
@@ -68,6 +74,7 @@ export const updateTaskService = async (
   const doc = snapshot.docs[0];
 
   await db.collection("tasks").doc(doc.id).update({
+    title,
     task,
     completed,
   });

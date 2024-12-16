@@ -9,15 +9,15 @@ import { TaskInterface } from "../interfaces/tasksInterfaces";
 
 export const createTask = async (req: Request, res: Response) => {
   try {
-    const { userId, task } = req.body;
+    const { userId, title, task } = req.body;
 
-    if (!userId || !task) {
+    if (!userId || !title || !task) {
       return res
         .status(400)
-        .json({ error: true, message: `Please add userId and task on json` });
+        .json({ error: true, message: `Please add userId, title task on json` });
     }
 
-    const data = await createTaskService(userId, task);
+    const data = await createTaskService(userId, title, task);
 
     return res.status(201).json(data);
   } catch (error) {
@@ -56,9 +56,14 @@ export const deleteTask = async (req: Request, res: Response) => {
 export const updateTask = async (req: Request, res: Response) => {
   try {
     const { taskId } = req.params;
-    const { task, completed } = req.body;
+    const { title, task, completed } = req.body;
 
-    const updated: boolean = await updateTaskService(taskId, task, completed);
+    const updated: boolean = await updateTaskService(
+      title,
+      taskId,
+      task,
+      completed
+    );
 
     return res.status(200).json({ updated });
   } catch (error: unknown) {
