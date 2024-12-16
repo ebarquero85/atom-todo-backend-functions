@@ -53,3 +53,24 @@ export const deleteTaskService = async (taskId: string) => {
 
   return true;
 };
+
+export const updateTaskService = async (
+  taskId: string,
+  task: string,
+  completed: boolean
+) => {
+  const snapshot = await db.collection("tasks").where("id", "==", taskId).get();
+
+  if (snapshot.empty) {
+    return false;
+  }
+
+  const doc = snapshot.docs[0];
+
+  await db.collection("tasks").doc(doc.id).update({
+    task,
+    completed,
+  });
+
+  return true;
+};

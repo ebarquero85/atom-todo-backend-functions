@@ -27,6 +27,8 @@ module.exports = {
     "object-curly-spacing": "off",
     "comma-dangle": "off",
     "linebreak-style": "off",
-    "quotes": "off", // Con comillas alrededor de todas las claves
+    "quotes": "off",
+    "indent": "off",
+    "new-cap": "off"
   },
 };
