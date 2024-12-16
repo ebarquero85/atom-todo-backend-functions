@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { createTask } from "../controllers/taskController";
+import { createTask, getTask } from "../controllers/taskController";
 
 const router = Router();
 
 router.post("/", createTask);
 
-//router.get("/:email", getUserByEmail);
+router.get("/", getTask);
 
 export default router;

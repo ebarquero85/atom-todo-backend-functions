@@ -18,6 +18,7 @@ export const getUserByEmailService = async (email: string) => {
   const data = snapshot.docs[0].data();
 
   return {
+    id: data.id,
     email: data.email,
     createdAt: data.createdAt.toDate(),
   };

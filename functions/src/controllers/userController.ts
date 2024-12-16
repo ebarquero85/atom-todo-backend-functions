@@ -29,8 +29,7 @@ export const getUserByEmail = async (req: Request, res: Response) => {
     const doc: UserInterface | null = await getUserByEmailService(email);
 
     if (doc !== null) {
-      let userData = doc as UserInterface;
-      return res.status(200).json(userData);
+      return res.status(200).json(doc);
     }
 
     return res.status(200).json({ email: null, createdAt: null });
