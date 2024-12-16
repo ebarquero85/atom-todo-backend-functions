@@ -9,17 +9,18 @@ import { TaskInterface } from "../interfaces/tasksInterfaces";
 
 export const createTask = async (req: Request, res: Response) => {
   try {
-    const { userId, title, task } = req.body;
+    const { userId, title, description } = req.body;
 
-    if (!userId || !title || !task) {
-      return res
-        .status(400)
-        .json({ error: true, message: `Please add userId, title task on json` });
+    if (!userId || !title || !description) {
+      return res.status(400).json({
+        error: true,
+        message: `Please add userId, title task on json`,
+      });
     }
 
-    const data = await createTaskService(userId, title, task);
+    const doc = await createTaskService(userId, title, description);
 
-    return res.status(201).json(data);
+    return res.status(201).json(doc);
   } catch (error) {
     return res.status(500).json({ error: true, message: "Error" });
   }
@@ -27,7 +28,8 @@ export const createTask = async (req: Request, res: Response) => {
 
 export const getTask = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.body;
+    // const { userId } = req.body;
+    const { userId } = req.params;
     const docs: TaskInterface[] = await getTaskService(userId);
 
     if (docs.length) {
@@ -35,8 +37,8 @@ export const getTask = async (req: Request, res: Response) => {
     }
 
     return res.status(200).json([]);
-  } catch (error: unknown) {
-    console.log(error);
+  } catch (error) {
+    // console.log(error);
     return res.status(500).json({ error: true, message: "Error" });
   }
 };
@@ -47,8 +49,8 @@ export const deleteTask = async (req: Request, res: Response) => {
     const deleted: boolean = await deleteTaskService(taskId);
 
     return res.status(200).json({ deleted });
-  } catch (error: unknown) {
-    console.log(error);
+  } catch (error) {
+    // console.log(error);
     return res.status(500).json({ error: true, message: "Error" });
   }
 };
@@ -56,18 +58,18 @@ export const deleteTask = async (req: Request, res: Response) => {
 export const updateTask = async (req: Request, res: Response) => {
   try {
     const { taskId } = req.params;
-    const { title, task, completed } = req.body;
+    const { title, description, completed } = req.body;
 
     const updated: boolean = await updateTaskService(
-      title,
       taskId,
-      task,
+      title,
+      description,
       completed
     );
 
     return res.status(200).json({ updated });
-  } catch (error: unknown) {
-    console.log(error);
+  } catch (error) {
+    // console.log(error);
     return res.status(500).json({ error: true, message: "Error" });
   }
 };

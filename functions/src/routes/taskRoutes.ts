@@ -10,7 +10,7 @@ const router = Router();
 
 router.post("/", createTask);
 
-router.get("/", getTask);
+router.get("/:userId", getTask);
 
 router.delete("/:taskId", deleteTask);
 

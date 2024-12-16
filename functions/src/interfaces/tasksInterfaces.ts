@@ -2,7 +2,7 @@ export interface TaskInterface {
   id: string;
   userId: string;
   title: string;
-  task: string;
+  description: string;
   completed: boolean;
   createdAt: Date;
   deleted: boolean;

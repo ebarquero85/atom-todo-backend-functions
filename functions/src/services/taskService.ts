@@ -4,7 +4,7 @@ import { TaskInterface } from "../interfaces/tasksInterfaces";
 export const createTaskService = async (
   userId: string,
   title: string,
-  task: string
+  description: string
 ) => {
   const newTaskRef = db.collection("tasks").doc();
 
@@ -12,8 +12,9 @@ export const createTaskService = async (
     id: newTaskRef.id,
     userId,
     title,
-    task,
+    description,
     completed: false,
+    deleted: false,
     createdAt: new Date(),
   };
 
@@ -60,12 +61,12 @@ export const deleteTaskService = async (taskId: string) => {
 };
 
 export const updateTaskService = async (
+  id: string,
   title: string,
-  taskId: string,
-  task: string,
+  description: string,
   completed: boolean
 ) => {
-  const snapshot = await db.collection("tasks").where("id", "==", taskId).get();
+  const snapshot = await db.collection("tasks").where("id", "==", id).get();
 
   if (snapshot.empty) {
     return false;
@@ -75,7 +76,7 @@ export const updateTaskService = async (
 
   await db.collection("tasks").doc(doc.id).update({
     title,
-    task,
+    description,
     completed,
   });
 

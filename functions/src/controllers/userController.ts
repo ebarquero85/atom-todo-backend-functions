@@ -15,9 +15,9 @@ export const createUser = async (req: Request, res: Response) => {
         .json({ error: true, message: `Please add a email on json` });
     }
 
-    const data = await createUserService(email);
+    const doc = await createUserService(email);
 
-    return res.status(201).json(data);
+    return res.status(201).json(doc);
   } catch (error) {
     return res.status(500).json({ error: true, message: "Error" });
   }
@@ -32,9 +32,9 @@ export const getUserByEmail = async (req: Request, res: Response) => {
       return res.status(200).json(doc);
     }
 
-    return res.status(200).json({ email: null, createdAt: null });
-  } catch (error: unknown) {
-    console.log(error);
+    return res.status(200).json(doc);
+  } catch (error) {
+    // console.log(error);
     return res.status(500).json({ error: true, message: "Error" });
   }
 };
